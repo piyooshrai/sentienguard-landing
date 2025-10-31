@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SentienGuard - Infrastructure Intelligence. Self-healing infrastructure that automatically resolves issues and creates audit-ready trails. No more 3am pages.">
+    <meta name="keywords" content="self-healing infrastructure, autonomous remediation, infrastructure automation, incident resolution, audit trails, DevOps automation">
+    <title>SentienGuard | Infrastructure Intelligence</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            background: #0a0e1a;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 14, 26, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.25rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-sentien {
+            color: #3b82f6;
+        }
+
+        .logo-guard {
+            color: #ffffff;
+        }
+
+        .tagline {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            margin-left: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #cbd5e1;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #3b82f6;
+        }
+
+        .nav-cta {
+            background: #3b82f6;
+            color: white;
+            padding: 0.65rem 1.75rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .nav-cta:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            padding: 4rem 5%;
+            position: relative;
+            background: linear-gradient(135deg, #0a0e1a 0%, #1a2332 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -200px;
+            right: -100px;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 3.75rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-text .highlight {
+            color: #3b82f6;
+        }
+
+        .hero-subtitle {
+            font-size: 1.35rem;
+            color: #94a3b8;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.25rem;
+            margin-bottom: 3rem;
+        }
+
+        .primary-btn {
+            background: #3b82f6;
+            color: white;
+            padding: 1.1rem 2.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            border: 2px solid #3b82f6;
+        }
+
+        .primary-btn:hover {
+            background: #2563eb;
+            border-color: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+
+        .secondary-btn {
+            background: transparent;
+            color: #3b82f6;
+            padding: 1.1rem 2.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            transition: all 0.3s;
+        }
+
+        .secondary-btn:hover {
+            border-color: #3b82f6;
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-item {
+            border-left: 2px solid rgba(59, 130, 246, 0.3);
+            padding-left: 1rem;
+        }
+
+        .stat-value {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: #3b82f6;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        /* Dashboard Preview */
+        .dashboard-preview {
+            background: rgba(26, 35, 50, 0.8);
+            border: 1px solid rgba(59, 130, 246, 0.15);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+        }
+
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+        }
+
+        .preview-title {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(34, 197, 94, 0.1);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #22c55e;
+            font-weight: 600;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .metric-card {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid rgba(59, 130, 246, 0.1);
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 0.25rem;
+        }
+
+        .metric-trend {
+            font-size: 0.85rem;
+            color: #22c55e;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .progress-section {
+            background: rgba(15, 23, 42, 0.4);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid rgba(59, 130, 246, 0.1);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+        }
+
+        .progress-label {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+
+        .progress-percentage {
+            font-size: 0.9rem;
+            color: #3b82f6;
+            font-weight: 700;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #22c55e);
+            border-radius: 4px;
+            width: 87%;
+            animation: progressLoad 2s ease-out;
+        }
+
+        @keyframes progressLoad {
+            from { width: 0; }
+            to { width: 87%; }
+        }
+
+        /* Problem Section */
+        .problem {
+            padding: 6rem 5%;
+            background: #0f172a;
+        }
+
+        .problem-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            max-width: 800px;
+            margin: 0 auto 4rem;
+            text-align: center;
+        }
+
+        .section-label {
+            display: inline-block;
+            color: #3b82f6;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .section-description {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            line-height: 1.7;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .comparison-card {
+            background: rgba(26, 35, 50, 0.5);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            text-align: center;
+        }
+
+        .comparison-card.highlight {
+            border: 2px solid rgba(59, 130, 246, 0.4);
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .comparison-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .comparison-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .comparison-description {
+            font-size: 1rem;
+            color: #94a3b8;
+            line-height: 1.7;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 6rem 5%;
+            background: linear-gradient(135deg, #0a0e1a 0%, #1a2332 100%);
+        }
+
+        .workflow-content {
+            max-width: 1400px;
+            margin: 3rem auto 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .workflow-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .workflow-step {
+            display: flex;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        .step-number {
+            min-width: 60px;
+            height: 60px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #3b82f6;
+        }
+
+        .step-content h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.75rem;
+        }
+
+        .step-content p {
+            font-size: 1rem;
+            color: #94a3b8;
+            line-height: 1.7;
+        }
+
+        .workflow-visual {
+            background: rgba(26, 35, 50, 0.5);
+            border: 1px solid rgba(59, 130, 246, 0.15);
+            border-radius: 12px;
+            padding: 2rem;
+            min-height: 500px;
+        }
+
+        .incident-log {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .log-header {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .log-entry {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 1.25rem;
+            border-radius: 8px;
+            border-left: 3px solid #3b82f6;
+        }
+
+        .log-timestamp {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-bottom: 0.5rem;
+        }
+
+        .log-action {
+            font-size: 1rem;
+            color: #ffffff;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .log-detail {
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .log-status {
+            display: inline-block;
+            margin-top: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 5%;
+            background: #0f172a;
+        }
+
+        .features-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(26, 35, 50, 0.5);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            filter: grayscale(30%);
+        }
+
+        .feature-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            font-size: 1rem;
+            color: #94a3b8;
+            line-height: 1.7;
+        }
+
+        /* Integration Section */
+        .integrations {
+            padding: 6rem 5%;
+            background: linear-gradient(135deg, #0a0e1a 0%, #1a2332 100%);
+        }
+
+        .integration-grid {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+        }
+
+        .integration-card {
+            background: rgba(26, 35, 50, 0.5);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .integration-card:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .integration-logo {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .integration-name {
+            font-size: 0.95rem;
+            color: #cbd5e1;
+            font-weight: 600;
+        }
+
+        /* Use Cases */
+        .use-cases {
+            padding: 6rem 5%;
+            background: #0f172a;
+        }
+
+        .use-cases-grid {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .use-case-card {
+            background: rgba(26, 35, 50, 0.5);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(59, 130, 246, 0.1);
+        }
+
+        .use-case-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .use-case-description {
+            font-size: 1rem;
+            color: #94a3b8;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .use-case-benefits {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: start;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+            color: #cbd5e1;
+        }
+
+        .benefit-icon {
+            color: #22c55e;
+            margin-top: 0.25rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 5%;
+            background: linear-gradient(135deg, #1a2332 0%, #0a0e1a 100%);
+            border-top: 1px solid rgba(59, 130, 246, 0.1);
+        }
+
+        .cta-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 3.25rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .cta-description {
+            font-size: 1.3rem;
+            color: #94a3b8;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.25rem;
+            justify-content: center;
+        }
+
+        /* Footer */
+        footer {
+            background: #0a0e1a;
+            padding: 4rem 5%;
+            border-top: 1px solid rgba(59, 130, 246, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand .logo-sentien {
+            color: #3b82f6;
+        }
+
+        .footer-brand .logo-guard {
+            color: #ffffff;
+        }
+
+        .footer-tagline {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-column h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.25rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #3b82f6;
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(59, 130, 246, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-legal a {
+            color: #64748b;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-legal a:hover {
+            color: #3b82f6;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-content,
+            .workflow-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .features-grid,
+            .comparison-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .use-cases-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .features-grid,
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .cta-title {
+                font-size: 2.25rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-content">
+            <div class="logo">
+                <div>
+                    <span class="logo-sentien">Sentien</span><span class="logo-guard">Guard</span>
+                </div>
+                <span class="tagline">Infrastructure Intelligence</span>
+            </div>
+            <div class="nav-links">
+                <a href="#how-it-works">How It Works</a>
+                <a href="#features">Features</a>
+                <a href="#use-cases">Use Cases</a>
+                <a href="#integrations">Integrations</a>
+                <a href="mailto:info@the-algo.com?subject=SentienGuard%20Demo%20Request" class="nav-cta">Request Demo</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Infrastructure That<br/><span class="highlight">Heals Itself.</span><br/>And Proves It.</h1>
+                <p class="hero-subtitle">The first platform that autonomously resolves infrastructure issues AND creates immutable audit trails. No more 3am pages. No more scrambling for incident documentation.</p>
+                <div class="hero-buttons">
+                    <a href="mailto:info@the-algo.com?subject=SentienGuard%20Demo%20Request" class="primary-btn">Request Demo</a>
+                    <a href="#how-it-works" class="secondary-btn">How It Works</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">5m</div>
+                        <div class="stat-label">Setup Time</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">24/7</div>
+                        <div class="stat-label">Self-Healing</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">100%</div>
+                        <div class="stat-label">Audit Trail</div>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-preview">
+                <div class="preview-header">
+                    <div class="preview-title">Live System Status</div>
+                    <div class="status-badge">
+                        <span class="status-dot"></span>
+                        Active & Learning
+                    </div>
+                </div>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-label">Auto-Resolved</div>
+                        <div class="metric-value">47</div>
+                        <div class="metric-trend">↑ Last 24hrs</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Uptime</div>
+                        <div class="metric-value">99.9%</div>
+                        <div class="metric-trend">No downtime</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">3am Pages</div>
+                        <div class="metric-value">0</div>
+                        <div class="metric-trend">This month</div>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-header">
+                        <span class="progress-label">Infrastructure Health</span>
+                        <span class="progress-percentage">87%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem">
+        <div class="problem-content">
+            <div class="section-header">
+                <div class="section-label">The Problem</div>
+                <h2 class="section-title">You're Forced to Choose</h2>
+                <p class="section-description">Most infrastructure tools make you pick between automation and accountability. SentienGuard gives you both.</p>
+            </div>
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <div class="comparison-icon">📊</div>
+                    <h3 class="comparison-title">Traditional Monitoring</h3>
+                    <p class="comparison-description">Datadog, New Relic, Prometheus watch your systems... then wake YOU up at 3am to fix the problem manually.</p>
+                </div>
+                <div class="comparison-card highlight">
+                    <div class="comparison-icon">⚡</div>
+                    <h3 class="comparison-title">SentienGuard</h3>
+                    <p class="comparison-description">Monitors, detects, fixes automatically, and documents everything. You sleep. Your infrastructure heals itself.</p>
+                </div>
+                <div class="comparison-card">
+                    <div class="comparison-icon">🤖</div>
+                    <h3 class="comparison-title">Pure Automation</h3>
+                    <p class="comparison-description">Ansible, Terraform automate fixes... but leave no audit trail. Good luck explaining to auditors what happened.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="section-header">
+            <div class="section-label">Intelligence in Action</div>
+            <h2 class="section-title">From Problem to Resolution<br/>Without Waking Your Team</h2>
+            <p class="section-description">Autonomous operations with complete human oversight.</p>
+        </div>
+        <div class="workflow-content">
+            <div class="workflow-steps">
+                <div class="workflow-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Continuous Monitoring</h3>
+                        <p>Watches your entire infrastructure 24/7. Monitors metrics, logs, and performance signals using both rule-based thresholds and AI-powered anomaly detection.</p>
+                    </div>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Intelligent Detection</h3>
+                        <p>Identifies issues the moment they occur. The AI decision engine analyzes the problem and selects the appropriate remediation playbook from your library.</p>
+                    </div>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Autonomous Remediation</h3>
+                        <p>Executes fixes automatically via Ansible, Terraform, or custom scripts. Restarts crashed services, scales resources, clears disk space, rolls back deployments.</p>
+                    </div>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Immutable Documentation</h3>
+                        <p>Creates timestamped audit trails of every incident, decision, and action. Complete logs ready for HIPAA, SOC2, or GDPR audits. No manual documentation needed.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="workflow-visual">
+                <div class="incident-log">
+                    <div class="log-header">Recent Auto-Resolutions</div>
+                    <div class="log-entry">
+                        <div class="log-timestamp">2025-10-31 02:37:14 UTC</div>
+                        <div class="log-action">Database Connection Pool Exhausted</div>
+                        <div class="log-detail">Detected: connections=500/500 | Action: Increased pool to 750 | Resolution: 2.3s</div>
+                        <span class="log-status">✓ Resolved</span>
+                    </div>
+                    <div class="log-entry">
+                        <div class="log-timestamp">2025-10-31 01:12:08 UTC</div>
+                        <div class="log-action">API Service Crashed</div>
+                        <div class="log-detail">Detected: HTTP 503 errors | Action: Restarted service pods | Resolution: 4.1s</div>
+                        <span class="log-status">✓ Resolved</span>
+                    </div>
+                    <div class="log-entry">
+                        <div class="log-timestamp">2025-10-30 23:45:32 UTC</div>
+                        <div class="log-action">Disk Usage Critical</div>
+                        <div class="log-detail">Detected: 94% full | Action: Cleaned old logs, compressed archives | Resolution: 8.7s</div>
+                        <span class="log-status">✓ Resolved</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-header">
+            <div class="section-label">Core Capabilities</div>
+            <h2 class="section-title">Built for Autonomy,<br/>Designed for Control</h2>
+            <p class="section-description">Every feature engineered to give you reliability without losing accountability.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h3 class="feature-title">Multi-Layer Monitoring</h3>
+                <p class="feature-description">Monitors servers, databases, applications, and services across your entire stack. Combines rule-based thresholds with AI anomaly detection for comprehensive coverage.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title">Self-Healing Actions</h3>
+                <p class="feature-description">Executes predefined playbooks via Ansible, Terraform, or custom scripts. Restarts services, scales infrastructure, clears resources, rolls back changes—automatically.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🧠</div>
+                <h3 class="feature-title">AI Decision Engine</h3>
+                <p class="feature-description">Intelligently selects the right remediation based on the problem context. Not black-box magic—it executes YOUR playbooks within guardrails YOU define.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📝</div>
+                <h3 class="feature-title">Audit-Ready Trails</h3>
+                <p class="feature-description">Immutable, timestamped logs of every incident and action. Complete documentation for HIPAA, SOC2, GDPR, or internal audits. Export reports instantly.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">👤</div>
+                <h3 class="feature-title">Human Oversight</h3>
+                <p class="feature-description">Configure what requires approval. Review, override, or escalate any action. You stay in control—SentienGuard handles the repetitive operational tasks.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔗</div>
+                <h3 class="feature-title">Universal Integration</h3>
+                <p class="feature-description">Works WITH your existing tools. Integrates with AWS, Azure, GCP, Datadog, PagerDuty, Ansible, Terraform, and 100+ platforms. No rip-and-replace.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section class="use-cases" id="use-cases">
+        <div class="section-header">
+            <div class="section-label">Who It's For</div>
+            <h2 class="section-title">Built for Teams That Need<br/>Uptime AND Accountability</h2>
+        </div>
+        <div class="use-cases-grid">
+            <div class="use-case-card">
+                <h3 class="use-case-title">Healthcare Providers</h3>
+                <p class="use-case-description">Maintain 99.9% uptime for patient systems while meeting HIPAA documentation requirements.</p>
+                <div class="use-case-benefits">
+                    <div class="benefit-item">
+                        <span class="benefit-icon">✓</span>
+                        <span>Zero downtime for critical patient systems</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">✓</span>
+                        <span>Complete audit trails for compliance officers</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">✓</span>
+                        <span>Automated incident documentation for regulators</span>
+                    </div>
+                </div>
+            </div>
+            <div class="use-case-card">
+                <h3 class="use-case-title">SaaS Companies</h3>
+                <p class="use-case-description">Scale reliability without scaling your DevOps team. Self-heal routine issues automatically.</p>
+                <div class="use-case-benefits">
+                    <div class="benefit-item">
+                        <span class="benefit-icon">✓</span>
+                        <span>No more 3am pages for routine incidents</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">✓</span>
+                        <span>Reduce MTTR from hours to seconds</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">✓</span>
+                        <span>Document everything for customer SLAs</span>
+                    </div>
+                </div>
+            </div>
+            <div class="use-case-card">
+                <h3 class="use-case-title">Fintech & Regulated Industries</h3>
+                <p class="use-case-description">Automate operations while maintaining complete audit trails for regulators and auditors.</p>
+                <div class="use-case-benefits">
+                    <div class="benefit-item">
+                        <span class="benefit-icon">✓</span>
+                        <span>Instant access to incident reports for audits</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">✓</span>
+                        <span>Prove who did what, when, and why</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">✓</span>
+                        <span>SOC2, ISO 27001, PCI DSS ready documentation</span>
+                    </div>
+                </div>
+            </div>
+            <div class="use-case-card">
+                <h3 class="use-case-title">Managed Service Providers</h3>
+                <p class="use-case-description">Manage multiple client infrastructures efficiently with automated healing and complete documentation.</p>
+                <div class="use-case-benefits">
+                    <div class="benefit-item">
+                        <span class="benefit-icon">✓</span>
+                        <span>Scale support across dozens of clients</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">✓</span>
+                        <span>Automatic resolution tracking per client</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">✓</span>
+                        <span>Transparent incident reporting for SLAs</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Integrations Section -->
+    <section class="integrations" id="integrations">
+        <div class="section-header">
+            <div class="section-label">Integrations</div>
+            <h2 class="section-title">Works With Your Existing Stack</h2>
+            <p class="section-description">Native integrations with the tools you already use. Deploys in minutes, not months.</p>
+        </div>
+        <div class="integration-grid">
+            <div class="integration-card">
+                <div class="integration-logo">☁️</div>
+                <div class="integration-name">AWS</div>
+            </div>
+            <div class="integration-card">
+                <div class="integration-logo">🔷</div>
+                <div class="integration-name">Azure</div>
+            </div>
+            <div class="integration-card">
+                <div class="integration-logo">🌐</div>
+                <div class="integration-name">GCP</div>
+            </div>
+            <div class="integration-card">
+                <div class="integration-logo">📊</div>
+                <div class="integration-name">Datadog</div>
+            </div>
+            <div class="integration-card">
+                <div class="integration-logo">🔔</div>
+                <div class="integration-name">PagerDuty</div>
+            </div>
+            <div class="integration-card">
+                <div class="integration-logo">🤖</div>
+                <div class="integration-name">Ansible</div>
+            </div>
+            <div class="integration-card">
+                <div class="integration-logo">🏗️</div>
+                <div class="integration-name">Terraform</div>
+            </div>
+            <div class="integration-card">
+                <div class="integration-logo">💬</div>
+                <div class="integration-name">Slack</div>
+            </div>
+            <div class="integration-card">
+                <div class="integration-logo">📦</div>
+                <div class="integration-name">GitHub</div>
+            </div>
+            <div class="integration-card">
+                <div class="integration-logo">☸️</div>
+                <div class="integration-name">Kubernetes</div>
+            </div>
+            <div class="integration-card">
+                <div class="integration-logo">🐳</div>
+                <div class="integration-name">Docker</div>
+            </div>
+            <div class="integration-card">
+                <div class="integration-logo">📈</div>
+                <div class="integration-name">Prometheus</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="cta">
+        <div class="cta-content">
+            <h2 class="cta-title">Stop Waking Up at 3am.<br/>Start Sleeping.</h2>
+            <p class="cta-description">See how SentienGuard autonomously heals your infrastructure while creating the audit trails you need. Setup takes 5 minutes.</p>
+            <div class="cta-buttons">
+                <a href="mailto:info@the-algo.com?subject=SentienGuard%20Demo%20Request" class="primary-btn">Request Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3><span class="logo-sentien">Sentien</span><span class="logo-guard">Guard</span></h3>
+                <p class="footer-tagline">Infrastructure Intelligence<br/>Part of The Algorithm Platform</p>
+            </div>
+            <div class="footer-column">
+                <h4>Product</h4>
+                <div class="footer-links">
+                    <a href="#features">Features</a>
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="#use-cases">Use Cases</a>
+                    <a href="#integrations">Integrations</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Company</h4>
+                <div class="footer-links">
+                    <a href="https://www.the-algo.com" target="_blank">About</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>© 2025 SentienGuard. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .workflow-step, .integration-card, .comparison-card, .use-case-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
